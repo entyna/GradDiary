@@ -194,21 +194,37 @@ function resetCurveDefault() {
   ];
 }
 
-if (showUI && pts && pts.length >= 4) drawBezierUI();
+if (showUI && pts && pts.length >= 4) {
+
+  drawBezierUI();
+
+}
 
 function drawBezierUI() {
   if (!pts || pts.length < 4) return;
+
   // control polygon
-  stroke(255, 90);
+  stroke(0);
   strokeWeight(1);
   noFill();
   beginShape();
   for (const p of pts) vertex(p.x, p.y);
   endShape();
 
+  // bezier curve HALO
+  stroke(0, 150);
+  strokeWeight(2);
+  noFill();
+  bezier(
+    pts[0].x, pts[0].y,
+    pts[1].x, pts[1].y,
+    pts[2].x, pts[2].y,
+    pts[3].x, pts[3].y
+  );
+
   // bezier curve
   stroke(255);
-  strokeWeight(2);
+  strokeWeight(1);
   noFill();
   bezier(
     pts[0].x, pts[0].y,
@@ -220,8 +236,9 @@ function drawBezierUI() {
   // draggable points (bigger for touch)
   for (let i = 0; i < pts.length; i++) {
     const p = pts[i];
-    noStroke();
-    fill(i === dragging ? 255 : 255, 220);
+    stroke(0);
+    strokeWeight(1);
+    fill(i === dragging ? 255 : 255);
     circle(p.x, p.y, 28);
   }
 }
