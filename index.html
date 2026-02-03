@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bezier Stripe Sampler</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- p5.js -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+</head>
+<body>
+  <div id="controls">
+    <div class="row">
+      <label class="btn">
+        Vybrat fotku
+        <input id="fileInput" type="file" accept="image/*" />
+      </label>
+
+      <button id="toggleUI" class="btn" disabled>Skrýt UI</button>
+      <button id="exportHQ" class="btn primary" disabled>Export HQ (PNG)</button>
+      <button id="resetCurve" class="btn" disabled>Reset křivky</button>
+    </div>
+
+    <div class="row info">
+      <div id="infoText">Nahraj fotku a začni 🙂</div>
+      <div id="statusText"></div>
+    </div>
+  </div>
+
+  <div id="sketch-holder"></div>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
