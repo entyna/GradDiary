@@ -14,6 +14,8 @@ let dragging = -1;
 let xAtY = [];
 let validAtY = [];
 
+let cnv;
+
 const PREVIEW_MAX = 1200; // longer side max
 
 // DOM
@@ -21,8 +23,8 @@ let elFile, btnToggleUI, btnExportHQ, btnReset, elInfo, elStatus;
 
 function setup() {
   // start with a small placeholder canvas
-  const c = createCanvas(10, 10);
-  c.parent("sketch-holder");
+  cnv = createCanvas(10, 10);
+  cnv.parent("sketch-holder");
   noLoop();
 
   // DOM refs
@@ -288,17 +290,24 @@ function mouseReleased() {
   dragging = -1;
 }
 
-// p5 on mobile sometimes prefers touch callbacks
-function touchStarted() {
+function touchStarted(e) {
+  if (e?.target !== cnv?.elt) return true; // tap mimo canvas => nech prohlížeč dělat click
   mousePressed();
-  return false; // prevent page scroll
-}
-function touchMoved() {
-  mouseDragged();
+  e.preventDefault();
   return false;
 }
-function touchEnded() {
+
+function touchMoved(e) {
+  if (e?.target !== cnv?.elt) return true;
+  mouseDragged();
+  e.preventDefault();
+  return false;
+}
+
+function touchEnded(e) {
+  if (e?.target !== cnv?.elt) return true;
   mouseReleased();
+  e.preventDefault();
   return false;
 }
 
